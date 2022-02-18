@@ -1,5 +1,8 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 from . import views
+from . import viewsets
+
 
 urlpatterns = [
     # http://localhost:8000/blog
@@ -18,4 +21,10 @@ urlpatterns = [
     path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     # http://localhost:8000/blog/comment/2/remove
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
+
+    # REST API
+    path('', include(router.urls)),
+    #path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    #http://localhost:8000/blog/api/login
+    path('api/login/', views.login, name='login')
 ]
